@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mostra Culturar - A arte que move a sociedade</title>
+    <title>Mostra Cultural - A arte que move a sociedade</title>
     <meta name="description" content="Explore a Arte de uma forma diferente.">
     <meta name="keywords" content="Arte, Obras de Arte, Etec, Arte estudantil, trabalho escolar">
     <style>
@@ -166,6 +165,15 @@
             box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
         }
 
+        .btn-voltar {
+            background-color: var(--azul-escuro);
+            margin-top: 1rem;
+        }
+
+        .btn-voltar:hover {
+            background-color: var(--azul-medio);
+        }
+
         .btn-secondary {
             background-color: transparent;
             border: 2px solid var(--branco);
@@ -242,18 +250,18 @@
             display: block;
         }
 
-        /* Obras */
-        .obras {
+        /* Cards de Fotos */
+        .fotos-section {
             background-color: var(--azul-bem-claro);
         }
 
-        .obras-grid {
+        .fotos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .obras-card {
+        .foto-card {
             background: var(--branco);
             border-radius: 15px;
             overflow: hidden;
@@ -262,59 +270,244 @@
             position: relative;
         }
 
-        .obras-card:hover {
+        .foto-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .obras-card img {
+        /* Carrossel dentro do card */
+        .carrossel-container {
+            position: relative;
             width: 100%;
             height: 200px;
+            overflow: hidden;
+        }
+
+        .carrossel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carrossel img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
-        .obras-card:hover img {
-            transform: scale(1.05);
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.3s;
         }
 
-        .obras-card-content {
-            padding: 1.8rem;
+        .carrossel-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
         }
 
-        .obras-card h3 {
+        .carrossel-prev {
+            left: 10px;
+        }
+
+        .carrossel-next {
+            right: 10px;
+        }
+
+        .carrossel-indicadores {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 2;
+        }
+
+        .indicador {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicador.ativo {
+            background: white;
+        }
+
+        .foto-card-content {
+            padding: 1.5rem;
+        }
+
+        .foto-card h3 {
             color: var(--azul-escuro);
             margin-bottom: 0.8rem;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
 
-        .obras-card p {
-            margin-bottom: 1.5rem;
+        .foto-card p {
+            margin-bottom: 0.5rem;
             color: var(--cinza);
+            font-size: 0.95rem;
         }
 
-        .obras-card .btn {
+        .participantes {
+            font-weight: 500;
+            color: var(--azul-medio);
+        }
+
+        /* Modal para expansão de imagem */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            text-align: center;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
-        .obras-badge {
+        .modal.mostrar {
+            display: flex;
+        }
+
+        .modal-conteudo {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-fechar {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: var(--verde);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
         }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+        .modal-navegacao {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: background 0.3s;
+        }
 
+        .modal-navegacao:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
 
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-indicadores {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .modal-indicador {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-indicador.ativo {
+            background: white;
+        }
+
+        /* Botão Voltar ao Topo */
+        .btn-voltar-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--azul-escuro);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .btn-voltar-topo.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-voltar-topo:hover {
+            background-color: var(--azul-medio);
+            transform: translateY(-5px);
+        }
 
         /* Footer */
         footer {
@@ -444,6 +637,26 @@
             .btn-secondary {
                 margin-left: 0;
             }
+
+            .btn-voltar-topo {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .modal-navegacao {
+                width: 40px;
+                height: 40px;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -458,8 +671,13 @@
                 font-size: 1.8rem;
             }
 
-            .obras-grid {
+            .fotos-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .carrossel-btn {
+                width: 25px;
+                height: 25px;
             }
         }
     </style>
@@ -472,7 +690,7 @@
                 <div class="logo">Mostra Cultural</div>
                 <ul class="nav-links">
                     <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#obras">Obras</a></li>
+                    <li><a href="#fotos">Fotos</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
                 <div class="menu-toggle" id="menuToggle">
@@ -490,6 +708,7 @@
             <h1 class="fade-in">Fotos</h1>
            <p class="fade-in delay-1">"A fotografia é a poesia do instante."<br><b>Autor desconhecido</b></p>
             <div class="btn-container fade-in delay-2">
+                <button class="btn btn-voltar" onclick="voltarPagina()">← Voltar à Página Anterior</button>
             </div>
         </div>
     </section>
@@ -497,79 +716,291 @@
     <!-- Sobre -->
     <section id="sobre" class="sobre">
         <div class="container">
-            <h2>Sobre o Projeto</h2>
+            <h2>1º DSEM</h2>
             <div class="sobre-content">
-                <div class="sobre-texto fade-in">
-                    <p> <strong>A Mostra Cultural é um projeto dos 1ºs Anos da Etec de Praia Grande, desenvolvida pela professora Erika (sobrenome)</p>
-                    <p>Nosso objetivo é compartilhar os conhecimentos e trabalhos realizados ao longo do ano letivo, com a professora Erika</p>
-                    <p>O projeto foi idealizado como parte das atividades escolares das turmas dos 1ºs ano, integrando tecnologia e educação de forma inovadora.</p>
+                <div class="sobre-texto">
+                    <p>Aqui você encontrará as fotos e obras produzidas pelos alunos do 1º DSEM. Cada trabalho representa um olhar único sobre o mundo através da arte.</p>
+                    <p>Explore as diferentes técnicas, perspectivas e expressões artísticas que nossos estudantes desenvolveram durante o projeto.</p>
                 </div>
-                <div class="Diogo.jpg fade-in delay-1">
-                    <img src="Fotos/Diogo.jpg" height="351px" width="626px">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Obras -->
-    <section id="obras" class="obras">
-        <div class="container">
-            <h2>Nossas Obras</h2>
-            <div class="obras-grid">
-                <div class="obras-card fade-in">
-                    <div class="obras-badge">Mais Popular</div>
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.--GUUNGwuhEVhqr0jUOKiQHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="América do Sul">
-                    <div class="obras-card-content">
-                        <h3>Fotos</h3>
-                        <p>Veja as Fotos dos trabalhos estudantis.</p>
-                        <a href="americasul.html" class="btn obras-link" data-obras="americasul">Explorar</a>
-                    </div>
-                </div>
-
-                <div class="obras-card fade-in delay-1">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.k-D-5R-ZRjCuKzgps-0E1QHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="América Central">
-                    <div class="obras-card-content">
-                        <h3>Vídeos</h3>
-                        <p>Conheça as Obras Cinematográficas feitas pelos alunos.</p>
-                        <a href="#" class="btn">Em Breve</a>
-                    </div>
-                </div>
-
-                <div class="obras-card fade-in delay-2">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.RQm5jSO6Y1ZDgfGPp7kcsAHaDk?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="América do Norte">
-                    <div class="obras-card-content">
-                        <h3>Contato</h3>
-                        <p>Quer sua obra aqui? Fale conosco</p>
-                        <a href="#" class="btn">Em Breve</a>
-                    </div>
+                <div class="sobre-imagem">
+                    <img src="https://via.placeholder.com/600x400" alt="Alunos do 1º DSEM trabalhando em projetos artísticos">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Fotos 1º DSEM -->
+    <section id="fotos" class="fotos-section">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Mostra Cultural</h3>
-                    <p>Um projeto educacional para testar e expandir conhecimentos sobre o as artes de todos os tempos.</p>
+            <h2>Galeria 1º DSEM</h2>
+            <div class="fotos-grid">
+                <!-- Card 1 com carrossel -->
+                <div class="foto-card fade-in">
+                    <div class="carrossel-container" id="carrossel-1">
+                        <div class="carrossel">
+                            <img src="https://via.placeholder.com/400x300/630a28/ffffff?text=Imagem+1" alt="Obra de arte 1">
+                            <img src="https://via.placeholder.com/400x300/b13993/ffffff?text=Imagem+2" alt="Obra de arte 2">
+                            <img src="https://via.placeholder.com/400x300/de7fd8/212121?text=Imagem+3" alt="Obra de arte 3">
+                        </div>
+                        <button class="carrossel-btn carrossel-prev">‹</button>
+                        <button class="carrossel-btn carrossel-next">›</button>
+                        <div class="carrossel-indicadores">
+                            <div class="indicador ativo"></div>
+                            <div class="indicador"></div>
+                            <div class="indicador"></div>
+                        </div>
+                    </div>
+                    <div class="foto-card-content">
+                        <h3>Manifesto em carne e sangue</h3>
+                        <p class="participantes">Juliano, Viviane, Vitor Felix, Gabriel Caetano e Diogo</p>
+                        <p>Uma série fotográfica que explora a expressão humana em suas formas mais puras e intensas.</p>
+                    </div>
                 </div>
-
-                <div class="footer-section">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#obras">Obras</a></li>
-                        <li><a href="#Contato">Contato</a></li>
-                    </ul>
+                
+                <!-- Card 2 com carrossel -->
+                <div class="foto-card fade-in delay-1">
+                    <div class="carrossel-container" id="carrossel-2">
+                        <div class="carrossel">
+                            <img src="https://via.placeholder.com/400x300/4CAF50/ffffff?text=Natureza+1" alt="Natureza 1">
+                            <img src="https://via.placeholder.com/400x300/388E3C/ffffff?text=Natureza+2" alt="Natureza 2">
+                        </div>
+                        <button class="carrossel-btn carrossel-prev">‹</button>
+                        <button class="carrossel-btn carrossel-next">›</button>
+                        <div class="carrossel-indicadores">
+                            <div class="indicador ativo"></div>
+                            <div class="indicador"></div>
+                        </div>
+                    </div>
+                    <div class="foto-card-content">
+                        <h3>Natureza Viva</h3>
+                        <p class="participantes">Carla Mendes, Diego Oliveira</p>
+                        <p>Exploração das cores e formas encontradas na natureza em diferentes estações.</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="copyright">
-                <p>&copy; 2025 Mostra Cultural - Todos os direitos reservados</p>
+                
+                <!-- Card 3 com carrossel -->
+                <div class="foto-card fade-in delay-2">
+                    <div class="carrossel-container" id="carrossel-3">
+                        <div class="carrossel">
+                            <img src="https://via.placeholder.com/400x300/FF9800/ffffff?text=Abstrato+1" alt="Abstrato 1">
+                            <img src="https://via.placeholder.com/400x300/F57C00/ffffff?text=Abstrato+2" alt="Abstrato 2">
+                            <img src="https://via.placeholder.com/400x300/E65100/ffffff?text=Abstrato+3" alt="Abstrato 3">
+                            <img src="https://via.placeholder.com/400x300/FF5722/ffffff?text=Abstrato+4" alt="Abstrato 4">
+                        </div>
+                        <button class="carrossel-btn carrossel-prev">‹</button>
+                        <button class="carrossel-btn carrossel-next">›</button>
+                        <div class="carrossel-indicadores">
+                            <div class="indicador ativo"></div>
+                            <div class="indicador"></div>
+                            <div class="indicador"></div>
+                            <div class="indicador"></div>
+                        </div>
+                    </div>
+                    <div class="foto-card-content">
+                        <h3>Abstrato Emocional</h3>
+                        <p class="participantes">Eduardo Lima, Fernanda Costa</p>
+                        <p>Composição abstrata que representa diferentes estados emocionais através de cores e formas.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Modal para expansão de imagem -->
+    <div class="modal" id="modalImagem">
+        <button class="modal-fechar" id="fecharModal">×</button>
+        <button class="modal-navegacao modal-prev" id="modalPrev">‹</button>
+        <button class="modal-navegacao modal-next" id="modalNext">›</button>
+        <div class="modal-conteudo">
+            <img class="modal-img" id="modalImg" src="" alt="">
+        </div>
+        <div class="modal-indicadores" id="modalIndicadores"></div>
+    </div>
+
+    <!-- Botão Voltar ao Topo -->
+    <div class="btn-voltar-topo" id="btnVoltarTopo" title="Voltar ao topo">
+        ↑
+    </div>
+
+    <script>
+        // Menu toggle para mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Botão Voltar ao Topo
+        const btnVoltarTopo = document.getElementById('btnVoltarTopo');
+        
+        // Mostrar/ocultar botão ao rolar a página
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnVoltarTopo.classList.add('visible');
+            } else {
+                btnVoltarTopo.classList.remove('visible');
+            }
+        });
+        
+        // Voltar ao topo quando clicar no botão
+        btnVoltarTopo.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Função para voltar à página anterior
+        function voltarPagina() {
+            window.history.back();
+        }
+
+        // Sistema de carrossel
+        document.querySelectorAll('.carrossel-container').forEach(container => {
+            const carrossel = container.querySelector('.carrossel');
+            const prevBtn = container.querySelector('.carrossel-prev');
+            const nextBtn = container.querySelector('.carrossel-next');
+            const indicadores = container.querySelectorAll('.indicador');
+            const imagens = carrossel.querySelectorAll('img');
+            
+            let indiceAtual = 0;
+            const totalImagens = imagens.length;
+            
+            // Função para atualizar carrossel
+            function atualizarCarrossel() {
+                carrossel.style.transform = `translateX(-${indiceAtual * 100}%)`;
+                
+                // Atualizar indicadores
+                indicadores.forEach((indicador, index) => {
+                    if (index === indiceAtual) {
+                        indicador.classList.add('ativo');
+                    } else {
+                        indicador.classList.remove('ativo');
+                    }
+                });
+            }
+            
+            // Event listeners para botões
+            prevBtn.addEventListener('click', () => {
+                indiceAtual = (indiceAtual - 1 + totalImagens) % totalImagens;
+                atualizarCarrossel();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                indiceAtual = (indiceAtual + 1) % totalImagens;
+                atualizarCarrossel();
+            });
+            
+            // Event listeners para indicadores
+            indicadores.forEach((indicador, index) => {
+                indicador.addEventListener('click', () => {
+                    indiceAtual = index;
+                    atualizarCarrossel();
+                });
+            });
+            
+            // Auto-play do carrossel
+            let intervaloCarrossel = setInterval(() => {
+                indiceAtual = (indiceAtual + 1) % totalImagens;
+                atualizarCarrossel();
+            }, 4000);
+            
+            // Pausar auto-play ao passar o mouse
+            container.addEventListener('mouseenter', () => {
+                clearInterval(intervaloCarrossel);
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                intervaloCarrossel = setInterval(() => {
+                    indiceAtual = (indiceAtual + 1) % totalImagens;
+                    atualizarCarrossel();
+                }, 4000);
+            });
+            
+            // Abrir modal ao clicar na imagem
+            imagens.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    abrirModal(container, index);
+                });
+            });
+        });
+
+        // Sistema de modal
+        const modal = document.getElementById('modalImagem');
+        const modalImg = document.getElementById('modalImg');
+        const fecharModal = document.getElementById('fecharModal');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalIndicadores = document.getElementById('modalIndicadores');
+        
+        let carrosselAtual = null;
+        let imagensModal = [];
+        let indiceModalAtual = 0;
+        
+        function abrirModal(container, indiceInicial) {
+            carrosselAtual = container;
+            imagensModal = Array.from(container.querySelectorAll('.carrossel img'));
+            indiceModalAtual = indiceInicial;
+            
+            atualizarModal();
+            modal.classList.add('mostrar');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function atualizarModal() {
+            modalImg.src = imagensModal[indiceModalAtual].src;
+            modalImg.alt = imagensModal[indiceModalAtual].alt;
+            
+            // Atualizar indicadores do modal
+            modalIndicadores.innerHTML = '';
+            imagensModal.forEach((_, index) => {
+                const indicador = document.createElement('div');
+                indicador.classList.add('modal-indicador');
+                if (index === indiceModalAtual) {
+                    indicador.classList.add('ativo');
+                }
+                indicador.addEventListener('click', () => {
+                    indiceModalAtual = index;
+                    atualizarModal();
+                });
+                modalIndicadores.appendChild(indicador);
+            });
+        }
+        
+        function fecharModalFn() {
+            modal.classList.remove('mostrar');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event listeners do modal
+        fecharModal.addEventListener('click', fecharModalFn);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                fecharModalFn();
+            }
+        });
+        
+        modalPrev.addEventListener('click', () => {
+            indiceModalAtual = (indiceModalAtual - 1 + imagensModal.length) % imagensModal.length;
+            atualizarModal();
+        });
+        
+        modalNext.addEventListener('click', () => {
+            indiceModalAtual = (indiceModalAtual + 1) % imagensModal.length;
+            atualizarModal();
+        });
+        
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('mostrar')) {
+                if (e.key === 'Escape') {
+                    fecharModalFn();
+                } else if (e.key === 'ArrowLeft') {
+                    modalPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    modalNext.click();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
