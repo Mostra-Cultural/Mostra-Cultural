@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostra Cultural - A arte que move a sociedade</title>
+    <meta name="description" content="Explore a Arte de uma forma diferente.">
+    <meta name="keywords" content="Arte, Obras de Arte, Etec, Arte estudantil, trabalho escolar">
+    <style>
+        :root {
+            --azul-escuro: #630a28;
+            --azul-medio: #b13993;
+            --azul-claro: #de7fd8;
+            --azul-bem-claro: hsl(330, 100%, 96%);
+            --branco: #ffffff;
+            --preto: #212121;
+            --cinza: #757575;
+            --cinza-claro: #f5f5f5;
+            --verde: #4CAF50;
+            --laranja: #FF9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--branco);
+            color: var(--preto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-medio) 100%);
+            color: var(--branco);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--azul-bem-claro);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-bem-claro);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--azul-bem-claro);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: var(--branco);
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(189, 41, 159, 0.85), rgba(84, 8, 65, 0.85)), url('https://th.bing.com/th/id/OIP.qbVnUg6r4A4D1ugnIuVr_QHaEo?o=7&cb=ucfimg2rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');
+            background-size: cover;
+            background-position: center;
+            color: var(--branco);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--laranja);
+            color: var(--branco);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-voltar {
+            background-color: var(--azul-escuro);
+            margin-top: 1rem;
+        }
+
+        .btn-voltar:hover {
+            background-color: var(--azul-medio);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--branco);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sections comuns */
+        section {
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--azul-escuro);
+            position: relative;
+            font-size: 2.2rem;
+        }
+
+        section h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--azul-claro);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Sobre */
+        .sobre {
+            background-color: var(--branco);
+        }
+        .container h2  {
+            color: rgb(63, 43, 58)
+        }
+        .sobre-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .sobre-texto {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .sobre-texto p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .sobre-imagem {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .sobre-imagem:hover {
+            transform: scale(1.02);
+        }
+
+        .sobre-imagem img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Cards de Fotos */
+        .fotos-section {
+            background-color: var(--azul-bem-claro);
+        }
+
+        .fotos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .foto-card {
+            background: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .foto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Carrossel dentro do card */
+        .carrossel-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.carrossel video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+        .carrossel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carrossel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.3s;
+        }
+
+        .carrossel-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carrossel-prev {
+            left: 10px;
+        }
+
+        .carrossel-next {
+            right: 10px;
+        }
+
+        .carrossel-indicadores {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 2;
+        }
+
+        .indicador {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicador.ativo {
+            background: white;
+        }
+
+        .foto-card-content {
+            padding: 1.5rem;
+        }
+
+        .foto-card h3 {
+            color: var(--azul-escuro);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .foto-card p {
+            margin-bottom: 0.5rem;
+            color: var(--cinza);
+            font-size: 0.95rem;
+        }
+
+        .participantes {
+            font-weight: 500;
+            color: var(--azul-medio);
+        }
+
+        /* Modal para expansão de imagem */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.mostrar {
+            display: flex;
+        }
+
+        .modal-conteudo {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-fechar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .modal-navegacao {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: background 0.3s;
+        }
+
+        .modal-navegacao:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-indicadores {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .modal-indicador {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-indicador.ativo {
+            background: white;
+        }
+
+        /* Botão Voltar ao Topo */
+        .btn-voltar-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--azul-escuro);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .btn-voltar-topo.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-voltar-topo:hover {
+            background-color: var(--azul-medio);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            padding: 4rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--azul-claro);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--azul-bem-claro);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--branco);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul-escuro);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 3.5rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .btn-voltar-topo {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .modal-navegacao {
+                width: 40px;
+                height: 40px;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .fotos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carrossel-btn {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mostra Cultural</div>
+                <ul class="nav-links">
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#fotos">Fotos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Fotos</h1>
+           <p class="fade-in delay-1">"A fotografia é a poesia do instante."<br><b>Autor desconhecido</b></p>
+            <div class="btn-container fade-in delay-2">
+                <button class="btn btn-voltar" onclick="voltarPagina()">← Voltar à Página Anterior</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>1º DSEM</h2>
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <p>Aqui você encontrará as fotos e obras produzidas pelos alunos do 1º DSEM. Cada trabalho representa um olhar único sobre o mundo através da arte.</p>
+                    <p>Explore as diferentes técnicas, perspectivas e expressões artísticas que nossos estudantes desenvolveram durante o projeto.</p>
+                </div>
+                <div class="sobre-imagem">
+                    <img src="https://via.placeholder.com/600x400" alt="Alunos do 1º DSEM trabalhando em projetos artísticos">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotos 1º DSEM -->
+    <section id="fotos" class="fotos-section">
+        <div class="container">
+            <h2>Galeria 1º DSEM</h2>
+            <div class="fotos-grid">
+                <!-- Card 1 com carrossel -->
+                <div class="foto-card fade-in">
+                    <div class="carrossel-container" id="carrossel-1">
+                       <video controls width="100%" height="100%">
+                            <source src="Videos/Performace-Racismo.mp4" type="video/mp4">
+                                 Seu navegador não suporta vídeos HTML5.
+                            </video>
+
+                    </div>  
+                    <div class="foto-card-content">
+                        <h3>Performance Sobre Racismo </h3>
+                        <p class="participantes">Amanda, Lara, Lívia, Melissa e Maria Eduarda</p>
+                        <p>Um vídeo que explora um tema muito complexo, o racismo</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 com carrossel -->
+                <div class="foto-card fade-in delay-1">
+                    <div class="carrossel-container" id="carrossel-2">
+                        <div class="carrossel">
+                            <img src="https://via.placeholder.com/400x300/4CAF50/ffffff?text=Natureza+1" alt="Natureza 1">
+                            <img src="https://via.placeholder.com/400x300/388E3C/ffffff?text=Natureza+2" alt="Natureza 2">
+                        </div>
+                        <button class="carrossel-btn carrossel-prev">‹</button>
+                        <button class="carrossel-btn carrossel-next">›</button>
+                        <div class="carrossel-indicadores">
+                            <div class="indicador ativo"></div>
+                            <div class="indicador"></div>
+                        </div>
+                    </div>
+                    <div class="foto-card-content">
+                        <h3>Natureza Viva</h3>
+                        <p class="participantes">Carla Mendes, Diego Oliveira</p>
+                        <p>Exploração das cores e formas encontradas na natureza em diferentes estações.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3 com carrossel -->
+                <div class="foto-card fade-in delay-2">
+                    <div class="carrossel-container" id="carrossel-3">
+                        <div class="carrossel">
+                            <img src="https://via.placeholder.com/400x300/FF9800/ffffff?text=Abstrato+1" alt="Abstrato 1">
+                            <img src="https://via.placeholder.com/400x300/F57C00/ffffff?text=Abstrato+2" alt="Abstrato 2">
+                            <img src="https://via.placeholder.com/400x300/E65100/ffffff?text=Abstrato+3" alt="Abstrato 3">
+                            <img src="https://via.placeholder.com/400x300/FF5722/ffffff?text=Abstrato+4" alt="Abstrato 4">
+                        </div>
+                        <button class="carrossel-btn carrossel-prev">‹</button>
+                        <button class="carrossel-btn carrossel-next">›</button>
+                        <div class="carrossel-indicadores">
+                            <div class="indicador ativo"></div>
+                            <div class="indicador"></div>
+                            <div class="indicador"></div>
+                            <div class="indicador"></div>
+                        </div>
+                    </div>
+                    <div class="foto-card-content">
+                        <h3>Abstrato Emocional</h3>
+                        <p class="participantes">Eduardo Lima, Fernanda Costa</p>
+                        <p>Composição abstrata que representa diferentes estados emocionais através de cores e formas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para expansão de imagem -->
+    <div class="modal" id="modalImagem">
+        <button class="modal-fechar" id="fecharModal">×</button>
+        <button class="modal-navegacao modal-prev" id="modalPrev">‹</button>
+        <button class="modal-navegacao modal-next" id="modalNext">›</button>
+        <div class="modal-conteudo">
+            <img class="modal-img" id="modalImg" src="" alt="">
+        </div>
+        <div class="modal-indicadores" id="modalIndicadores"></div>
+    </div>
+
+    <!-- Botão Voltar ao Topo -->
+    <div class="btn-voltar-topo" id="btnVoltarTopo" title="Voltar ao topo">
+        ↑
+    </div>
+
+    <script>
+        // Menu toggle para mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Botão Voltar ao Topo
+        const btnVoltarTopo = document.getElementById('btnVoltarTopo');
+        
+        // Mostrar/ocultar botão ao rolar a página
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                btnVoltarTopo.classList.add('visible');
+            } else {
+                btnVoltarTopo.classList.remove('visible');
+            }
+        });
+        
+        // Voltar ao topo quando clicar no botão
+        btnVoltarTopo.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Função para voltar à página anterior
+        function voltarPagina() {
+            window.history.back();
+        }
+
+        // Sistema de carrossel
+        document.querySelectorAll('.carrossel-container').forEach(container => {
+            const carrossel = container.querySelector('.carrossel');
+            const prevBtn = container.querySelector('.carrossel-prev');
+            const nextBtn = container.querySelector('.carrossel-next');
+            const indicadores = container.querySelectorAll('.indicador');
+            const imagens = carrossel.querySelectorAll('img');
+            
+            let indiceAtual = 0;
+            const totalImagens = imagens.length;
+            
+            // Função para atualizar carrossel
+            function atualizarCarrossel() {
+                carrossel.style.transform = `translateX(-${indiceAtual * 100}%)`;
+                
+                // Atualizar indicadores
+                indicadores.forEach((indicador, index) => {
+                    if (index === indiceAtual) {
+                        indicador.classList.add('ativo');
+                    } else {
+                        indicador.classList.remove('ativo');
+                    }
+                });
+            }
+            
+            // Event listeners para botões
+            prevBtn.addEventListener('click', () => {
+                indiceAtual = (indiceAtual - 1 + totalImagens) % totalImagens;
+                atualizarCarrossel();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                indiceAtual = (indiceAtual + 1) % totalImagens;
+                atualizarCarrossel();
+            });
+            
+            // Event listeners para indicadores
+            indicadores.forEach((indicador, index) => {
+                indicador.addEventListener('click', () => {
+                    indiceAtual = index;
+                    atualizarCarrossel();
+                });
+            });
+            
+            // Auto-play do carrossel
+            let intervaloCarrossel = setInterval(() => {
+                indiceAtual = (indiceAtual + 1) % totalImagens;
+                atualizarCarrossel();
+            }, 4000);
+            
+            // Pausar auto-play ao passar o mouse
+            container.addEventListener('mouseenter', () => {
+                clearInterval(intervaloCarrossel);
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                intervaloCarrossel = setInterval(() => {
+                    indiceAtual = (indiceAtual + 1) % totalImagens;
+                    atualizarCarrossel();
+                }, 4000);
+            });
+            
+            // Abrir modal ao clicar na imagem
+            imagens.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    abrirModal(container, index);
+                });
+            });
+        });
+
+        // Sistema de modal
+        const modal = document.getElementById('modalImagem');
+        const modalImg = document.getElementById('modalImg');
+        const fecharModal = document.getElementById('fecharModal');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalIndicadores = document.getElementById('modalIndicadores');
+        
+        let carrosselAtual = null;
+        let imagensModal = [];
+        let indiceModalAtual = 0;
+        
+        function abrirModal(container, indiceInicial) {
+            carrosselAtual = container;
+            imagensModal = Array.from(container.querySelectorAll('.carrossel img'));
+            indiceModalAtual = indiceInicial;
+            
+            atualizarModal();
+            modal.classList.add('mostrar');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function atualizarModal() {
+            modalImg.src = imagensModal[indiceModalAtual].src;
+            modalImg.alt = imagensModal[indiceModalAtual].alt;
+            
+            // Atualizar indicadores do modal
+            modalIndicadores.innerHTML = '';
+            imagensModal.forEach((_, index) => {
+                const indicador = document.createElement('div');
+                indicador.classList.add('modal-indicador');
+                if (index === indiceModalAtual) {
+                    indicador.classList.add('ativo');
+                }
+                indicador.addEventListener('click', () => {
+                    indiceModalAtual = index;
+                    atualizarModal();
+                });
+                modalIndicadores.appendChild(indicador);
+            });
+        }
+        
+        function fecharModalFn() {
+            modal.classList.remove('mostrar');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event listeners do modal
+        fecharModal.addEventListener('click', fecharModalFn);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                fecharModalFn();
+            }
+        });
+        
+        modalPrev.addEventListener('click', () => {
+            indiceModalAtual = (indiceModalAtual - 1 + imagensModal.length) % imagensModal.length;
+            atualizarModal();
+        });
+        
+        modalNext.addEventListener('click', () => {
+            indiceModalAtual = (indiceModalAtual + 1) % imagensModal.length;
+            atualizarModal();
+        });
+        
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('mostrar')) {
+                if (e.key === 'Escape') {
+                    fecharModalFn();
+                } else if (e.key === 'ArrowLeft') {
+                    modalPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    modalNext.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
