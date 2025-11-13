@@ -237,10 +237,13 @@
         }
 
         .sobre-imagem img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+    width: 626px;
+    height: 351px;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
 
         /* Obras */
         .obras {
@@ -447,6 +450,11 @@
         }
 
         @media (max-width: 480px) {
+              .sobre-imagem img {
+        width: 100%;
+        height: auto;
+    }
+            
             .logo {
                 font-size: 1.2rem;
             }
@@ -504,9 +512,10 @@
                     <p>Nosso objetivo é compartilhar os conhecimentos e trabalhos realizados ao longo do ano letivo, com a professora Erika</p>
                     <p>O projeto foi idealizado como parte das atividades escolares das turmas dos 1ºs ano, integrando tecnologia e educação de forma inovadora.</p>
                 </div>
-                <div class="Diogo.jpg fade-in delay-1">
-                    <img src="Fotos/Diogo.jpg" height="351px" width="626px">
-                </div>
+                    <div class="sobre-imagem fade-in delay-1">
+                        <img src="Diogo.jpg" alt="Foto do projeto Diogo">
+                    </div>
+
             </div>
         </div>
     </section>
@@ -574,3 +583,4 @@
 </body>
 
 </html>
+
