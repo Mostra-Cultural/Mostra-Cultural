@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostra Cultural - Contato</title>
+    <meta name="description" content="Entre em contato com a Mostra Cultural">
+    <meta name="keywords" content="Arte, Obras de Arte, Etec, Contato">
+    <style>
+        :root {
+            --azul-escuro: #630a28;
+            --azul-medio: #b13993;
+            --azul-claro: #de7fd8;
+            --azul-bem-claro: hsl(330, 100%, 96%);
+            --branco: #ffffff;
+            --preto: #212121;
+            --cinza: #757575;
+            --cinza-claro: #f5f5f5;
+            --verde: #4CAF50;
+            --laranja: #FF9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--branco);
+            color: var(--preto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-medio) 100%);
+            color: var(--branco);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-bem-claro);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--azul-bem-claro);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: var(--branco);
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(189, 41, 159, 0.85), rgba(84, 8, 65, 0.85)), url('https://th.bing.com/th/id/OIP.qbVnUg6r4A4D1ugnIuVr_QHaEo?o=7&cb=ucfimg2rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');
+            background-size: cover;
+            background-position: center;
+            color: var(--branco);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--laranja);
+            color: var(--branco);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-voltar {
+            background-color: var(--azul-escuro);
+            margin-top: 1rem;
+        }
+
+        .btn-voltar:hover {
+            background-color: var(--azul-medio);
+        }
+
+        /* Sections comuns */
+        section {
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--azul-escuro);
+            position: relative;
+            font-size: 2.2rem;
+        }
+
+        section h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--azul-claro);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Contato Section */
+        .contato {
+            background-color: var(--azul-bem-claro);
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Cards no estilo das Obras */
+        .contato-card {
+            background: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .contato-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .contato-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .contato-card:hover .contato-card-img {
+            transform: scale(1.05);
+        }
+
+        .contato-card-content {
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .contato-card h3 {
+            color: var(--azul-escuro);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .contato-card p {
+            margin-bottom: 1.5rem;
+            color: var(--cinza);
+        }
+
+        .email-link {
+    color: var(--azul-medio);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+        .email-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.email-link {
+    color: var(--azul-medio);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s;
+    text-align: center;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--azul-bem-claro);
+    border-radius: 8px;
+    background: var(--azul-bem-claro);
+}
+
+.email-link:hover {
+    color: var(--azul-escuro);
+    text-decoration: underline;
+    background: var(--branco);
+}
+
+        .email-link:hover {
+            color: var(--azul-escuro);
+            text-decoration: underline;
+        }
+
+        .contato-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--verde);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            padding: 4rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--azul-claro);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--azul-bem-claro);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--branco);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul-escuro);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 3.5rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .contato-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mostra Cultural</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="fotos.html">Fotos</a></li>
+                    <li><a href="videos.html">Vídeos</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Contato</h1>
+            <p class="fade-in delay-1">Entre em contato conosco para mais informações sobre o projeto</p>
+            <div class="btn-container fade-in delay-2">
+                <a href="index.html" class="btn btn-voltar">← Voltar à Página Inicial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Fale Conosco</h2>
+            <div class="contato-grid">
+                <!-- Card Email -->
+                <!-- Card Email -->
+<div class="contato-card fade-in">
+    <div class="contato-badge">Principal</div>
+    <img src="https://tse4.mm.bing.net/th/id/OIP.t9w_QJ4HdfeY1FF42joJuAHaEU?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Email" class="contato-card-img">
+    <div class="contato-card-content">
+        <h3>Email</h3>
+        <p>Envie um email para nossa equipe</p>
+        <div class="email-container">
+            <a href="mailto:mostracultural.2025.etecpg@gmail.com" class="email-link">mostracultural.2025.etecpg@gmail.com</a>
+        </div>
+    </div>
+</div>
+
+                <!-- Card Escola -->
+                <div class="contato-card fade-in delay-1">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.MCXs7KnL9jBm2fxUe_VtzgHaHa?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Escola" class="contato-card-img">
+                    <div class="contato-card-content">
+                        <h3>Escola</h3>
+                        <p>Etec de Praia Grande</p>
+                        <p>Projeto dos 1ºs anos</p>
+                    </div>
+                </div>
+
+                <!-- Card Professora -->
+                <div class="contato-card fade-in delay-2">
+                    <img src="prof.jpeg" alt="Professora" class="contato-card-img">
+                    <div class="contato-card-content">
+                        <h3>Professora Responsável</h3>
+                        <p>Erica da Costa Santos</p>
+                        <p>Orientadora do projeto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mostra Cultural</h3>
+                    <p>Um projeto educacional para testar e expandir conhecimentos sobre as artes de todos os tempos.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="fotos.html">Fotos</a></li>
+                        <li><a href="videos.html">Vídeos</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Mostra Cultural - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle para mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
